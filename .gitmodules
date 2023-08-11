@@ -1,0 +1,3 @@
+[submodule "config/custom_components/ESPHome-LD2410"]
+	path = config/custom_components/ESPHome-LD2410
+	url = https://github.com/Heyxk/ESPHome-LD2410.git

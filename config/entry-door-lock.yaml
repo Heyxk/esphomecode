@@ -1,0 +1,52 @@
+esphome:
+  name: entry-door-lock
+  friendly_name: entry_door_lock
+  platformio_options: 
+    board_build.flash_mode: dio
+
+esp32:
+  board: airm2m_core_esp32c3
+  framework:
+    type: arduino
+
+# Enable logging
+logger:
+  baud_rate: 0
+
+ota:
+
+wifi:
+  ssid: !secret wifi_ssid
+  password: !secret wifi_password
+
+  # Enable fallback hotspot (captive portal) in case wifi connection fails
+  ap:
+    ssid: "Entry-Door-Lock Fallback Hotspot"
+    password: "3XlufVUUNglZ"
+
+captive_portal:
+
+# Enable Home Assistant API
+api:
+
+output:
+  - platform: ledc
+    id: pwm_output
+    pin: 9
+    frequency: 50Hz
+
+servo:
+  - id: door_servo
+    output: pwm_output
+
+button:
+  - platform: template
+    name: "open entry door"
+    on_press:
+      - servo.write:
+          id: door_servo
+          level: +100.0%
+      - delay: 0.5s
+      - servo.write:
+          id: door_servo
+          level: 0% 

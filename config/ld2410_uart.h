@@ -1,0 +1,1 @@
+custom_components/ESPHome-LD2410/ld2410_uart.h
